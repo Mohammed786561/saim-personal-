@@ -2,50 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rainbow Text</title>
+  <title>lol</title>
   <style>
     body {
       background: #111;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       margin: 0;
-      font-family: Arial, sans-serif;
     }
 
-    #input-box {
-      padding: 12px 20px;
-      font-size: 18px;
-      border-radius: 10px;
-      border: 2px solid #555;
-      background: #222;
-      color: white;
-      width: 360px;
-      outline: none;
-      margin-bottom: 30px;
-    }
-
-    #display {
-      font-size: 48px;
+    #text {
+      font-size: 72px;
       font-weight: bold;
+      font-family: Arial, sans-serif;
       letter-spacing: 4px;
-      min-height: 60px;
       text-align: center;
     }
 
-    .rainbow-char {
+    span {
       display: inline-block;
-      animation: rainbowAnim 1.5s linear infinite;
+      animation: rainbow 1.5s linear infinite;
     }
 
-    @keyframes rainbowAnim {
+    @keyframes rainbow {
       0%   { color: red; }
       14%  { color: orange; }
       28%  { color: yellow; }
-      42%  { color: #00ee00; }
-      57%  { color: #00bbff; }
+      42%  { color: lime; }
+      57%  { color: dodgerblue; }
       71%  { color: blue; }
       85%  { color: violet; }
       100% { color: red; }
@@ -53,35 +39,17 @@
   </style>
 </head>
 <body>
-
-  <input id="input-box" type="text" placeholder="Type something..." />
-  <div id="display"></div>
+  <div id="text"></div>
 
   <script>
-    const TRIGGER = "saim your gay";
-    const input = document.getElementById("input-box");
-    const display = document.getElementById("display");
-
-    const colors = ["red","orange","yellow","lime","dodgerblue","blue","violet"];
-
-    input.addEventListener("input", () => {
-      const val = input.value;
-      display.innerHTML = "";
-
-      if (val.toLowerCase() === TRIGGER) {
-        for (let i = 0; i < val.length; i++) {
-          const span = document.createElement("span");
-          span.classList.add("rainbow-char");
-          span.style.animationDelay = `${(i / val.length) * -1.5}s`;
-          span.textContent = val[i] === " " ? "\u00A0" : val[i];
-          display.appendChild(span);
-        }
-      } else {
-        display.textContent = val;
-        display.style.color = "white";
-      }
-    });
+    const msg = "saim your gay";
+    const div = document.getElementById("text");
+    for (let i = 0; i < msg.length; i++) {
+      const s = document.createElement("span");
+      s.textContent = msg[i] === " " ? "\u00A0" : msg[i];
+      s.style.animationDelay = `${(i / msg.length) * -1.5}s`;
+      div.appendChild(s);
+    }
   </script>
-
 </body>
 </html>
