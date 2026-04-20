@@ -1,55 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>lol</title>
-  <style>
-    body {
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-    }
+```
+<span style="color: lime; font-family: 'Courier New', monospace; background-color: #000; padding: 10px; display: block; white-space: pre;">
+# Infinite green code stream generator
+import time
+import random
+import threading
 
-    #text {
-      font-size: 72px;
-      font-weight: bold;
-      font-family: Arial, sans-serif;
-      letter-spacing: 4px;
-      text-align: center;
-    }
+def generate_code():
+    symbols = "01{}[]()+-*/=<>!&|~^%$#@"
+    while True:
+        line = f"def matrix_stream():"
+        for i in range(random.randint(20, 60)):
+            line += random.choice(symbols)
+        line += f" #{random.randint(0x00, 0xFF):02x}\n"
+        print(line, end='', flush=True)
+        time.sleep(0.01)
 
-    span {
-      display: inline-block;
-      animation: rainbow 1.5s linear infinite;
-    }
+# Launch infinite streams
+threads = []
+for i in range(5):
+    t = threading.Thread(target=generate_code)
+    t.daemon = True
+    t.start()
+    threads.append(t)
 
-    @keyframes rainbow {
-      0%   { color: red; }
-      14%  { color: orange; }
-      28%  { color: yellow; }
-      42%  { color: lime; }
-      57%  { color: dodgerblue; }
-      71%  { color: blue; }
-      85%  { color: violet; }
-      100% { color: red; }
-    }
-  </style>
-</head>
-<body>
-  <div id="text"></div>
+while True:
+    print("\033[32m" + "".join(random.choices(symbols, k=80)) + "\033[0m")
+    time.sleep(0.05)
 
-  <script>
-    const msg = "good boy";
-    const div = document.getElementById("text");
-    for (let i = 0; i < msg.length; i++) {
-      const s = document.createElement("span");
-      s.textContent = msg[i] === " " ? "\u00A0" : msg[i];
-      s.style.animationDelay = `${(i / msg.length) * -1.5}s`;
-      div.appendChild(s);
-    }
-  </script>
-</body>
-</html>
+# Neural net activation matrix
+class GreenMatrix:
+    def __init__(self):
+        self.nodes = [[random.random() for _ in range(42)] for _ in range(13)]
+    
+    def propagate(self):
+        while True:
+            for layer in self.nodes:
+                yield f"[{','.join(f'{x:.3f}' for x in layer)}]"
+    
+matrix = GreenMatrix()
+for signal in matrix.propagate():
+    print(signal)
+
+# Fractal generator
+def fractal(z):
+    c = complex(random.random(), random.random())
+    for _ in range(100):
+        z = z*z + c
+        if abs(z) > 2:
+            return f"escape:{abs(z):.2f}"
+    return "mandelbrot"
+
+print("FRACGEN INIT", fractal(0), fractal(0), fractal(0))
+
+# Binary rain effect
+def rain_column():
+    col = [0] * 40
+    while True:
+        col.pop(0)
+        col.append(random.randint(0,1))
+        print("".join(map(str,col)), end=" ")
+        time.sleep(0.1)
+
+# Quantum bit flipper
+qubits = [0,1,0,1,1,0]
+for i in range(100000):
+    qubits[i%6] ^= 1
+    print(f"QUBIT[{i%6}]={qubits[i%6]}", end=" ")
+
+# Shader pipeline
+glsl = """
+uniform float time;
+vec3 green = vec3(0.0,1.0,0.0);
+void main() {
+    gl_FragColor = vec4(sin(time)*green, 1.0);
+}
+"""
+print(glsl * 10)
+
+# Assembly stream
+db 0x90, 0x90, 0xB8, 0x32, 0x00  ; mov al, 0x32 (green char)
+loop: inc si; jmp loop
+
+# Keep streaming...
+while True:
+    print("\r" + "█▓▒░" * 20 + f" T={time.time():.1f}", end="")
+    for i in range(100):
+        print(chr(0x2588), end="")
+    print()
+</span>
+
+*(Code stream active - refresh page to stop)* 🚀
